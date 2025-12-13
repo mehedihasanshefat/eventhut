@@ -9,7 +9,6 @@ import { revalidatePath } from "next/cache";
 
 // Create user ///////////////////////////////////////////////
 export const createUser = async (user: CreateUserParams) => {
-  console.log("I was called 🔥");
   try {
     const connection = await connectToDatabase();
     console.log(connection);

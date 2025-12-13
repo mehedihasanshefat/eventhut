@@ -15,12 +15,9 @@ export async function HEAD() {
 }
 
 export async function POST(req: NextRequest) {
-  console.log("Hello from webhook 😀");
   try {
     const evt = await verifyWebhook(req);
 
-    // Do something with payload
-    // For this guide, log payload to console
     const { id } = evt.data;
     const eventType = evt.type;
 
