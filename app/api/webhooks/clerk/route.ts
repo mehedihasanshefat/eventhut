@@ -1,7 +1,18 @@
+export const runtime = "nodejs";
 import { createUser, deleteUser, updateUser } from "@/lib/actions/user.actions";
 import { verifyWebhook } from "@clerk/nextjs/webhooks";
 import { NextRequest, NextResponse } from "next/server";
 import { clerkClient } from "@clerk/nextjs/server";
+
+// 👇 REQUIRED: allow Clerk to validate endpoint
+export async function GET() {
+  return NextResponse.json({ ok: true });
+}
+
+// (optional but recommended)
+export async function HEAD() {
+  return new NextResponse(null, { status: 200 });
+}
 
 export async function POST(req: NextRequest) {
   console.log("Hello from webhook 😀");
