@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { clerkClient } from "@clerk/nextjs/server";
 
 export async function POST(req: NextRequest) {
+  console.log("Hello from webhook 😀");
   try {
     const evt = await verifyWebhook(req);
 
