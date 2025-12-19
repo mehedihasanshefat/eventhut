@@ -1,5 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "uploadthing/tw/v4";
+@source "../node_modules/@uploadthing/react/dist";
+/** <-- depends on your project structure */
 
 /* ========================================== DARK MODE VARIANT */
 @custom-variant dark (&:is(.dark *));
@@ -82,6 +85,14 @@
   --sidebar-ring: oklch(0.708 0 0);
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
+  /* custom */
+  --cus-color-primary-50: #f6f8fd;
+  --cus-color-primary-500: #624cf5;
+  --cus-color-coral-500: #15bf59;
+  --cus-color-grey-50: #f6f6f6;
+  --cus-color-grey-400: #afafaf;
+  --cus-color-grey-500: #757575;
+  --cus-color-grey-600: #545454;
 }
 
 /* ========================================== DARK MODE VARIABLES */
@@ -133,6 +144,10 @@
     @apply bg-background text-foreground;
     font-family: var(--font-poppins);
   }
+}
+.filter-grey {
+  filter: brightness(0) saturate(100%) invert(47%) sepia(0%) saturate(217%)
+    hue-rotate(32deg) brightness(98%) contrast(92%);
 }
 
 /* /////////////////////////////////////////////////////////// */
@@ -284,6 +299,7 @@
 /* //////////////// CONFIG FILE ////////////////////////// */
 
 /* ========================================== CUS COLORS */
+
 .cus-color-primary {
   color: hsl(var(--primary));
 }
