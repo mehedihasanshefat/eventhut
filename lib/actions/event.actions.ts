@@ -7,7 +7,7 @@ import Event from "@/lib/database/models/event.model";
 import User from "@/lib/database/models/user.model";
 import Category from "@/lib/database/models/category.model";
 import { handleError } from "@/lib/utils";
-
+// import { IEvent } from "@/lib/database/models/event.model";
 import {
   CreateEventParams,
   UpdateEventParams,
@@ -16,6 +16,7 @@ import {
   GetEventsByUserParams,
   GetRelatedEventsByCategoryParams,
 } from "@/types";
+// import mongoose from "mongoose";
 
 const getCategoryByName = async (name: string) => {
   return Category.findOne({ name: { $regex: name, $options: "i" } });
@@ -149,6 +150,7 @@ export async function getEventsByUser({
   limit = 6,
   page,
 }: GetEventsByUserParams) {
+  console.log("seruser-id", userId);
   try {
     await connectToDatabase();
 
@@ -183,9 +185,13 @@ export async function getRelatedEventsByCategory({
     await connectToDatabase();
 
     const skipAmount = (Number(page) - 1) * limit;
+    // const conditions = {
+    //   $and: [{ category: categoryId }, { _id: { $ne: eventId } }],
+    // };
+
     const conditions = {
       $and: [{ category: categoryId }, { _id: { $ne: eventId } }],
-    };
+    } as any;
 
     const eventsQuery = Event.find(conditions)
       .sort({ createdAt: "desc" })

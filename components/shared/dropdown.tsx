@@ -82,7 +82,10 @@ function Dropdown({ onChangeHandler, value }: DropdownProps) {
 
         <SelectContent>
           {categories.map((category) => (
-            <SelectItem key={category._id} value={category._id}>
+            <SelectItem
+              key={category._id.toString()}
+              value={category._id.toString()}
+            >
               {category.name}
             </SelectItem>
           ))}

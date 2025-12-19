@@ -1,8 +1,24 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
+import { GetAllEventsParams, SearchParamProps } from "@/types";
+import { getAllEvents } from "@/lib/actions/event.actions";
+import Collection from "@/components/shared/collection";
+import Search from "@/components/shared/search";
+import CategoryFilter from "@/components/shared/category-filter";
+// import { SearchParamProps } from "@/types";
 
-function HomePage() {
+async function HomePage({ searchParams }: SearchParamProps) {
+  const sParams = await searchParams;
+  const page = Number(sParams?.page) || 1;
+  const searchText = (sParams?.query as string) || "";
+  const category = (sParams?.category as string) || "";
+  const events = await getAllEvents({
+    query: searchText,
+    category,
+    page,
+    limit: 6,
+  });
   return (
     <>
       <section className="bg-cus-primary-50 cus-bg-dotted-pattern bg-contain py-5 md:py-10">
@@ -38,11 +54,11 @@ function HomePage() {
         </h2>
 
         <div className="flex w-full flex-col gap-5 md:flex-row">
-          {/* <Search />
-          <CategoryFilter /> */}
+          <Search />
+          <CategoryFilter />
         </div>
 
-        {/* <Collection 
+        <Collection
           data={events?.data}
           emptyTitle="No Events Found"
           emptyStateSubtext="Come back later"
@@ -50,7 +66,7 @@ function HomePage() {
           limit={6}
           page={page}
           totalPages={events?.totalPages}
-        /> */}
+        />
       </section>
     </>
   );

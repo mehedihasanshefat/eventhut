@@ -120,6 +120,13 @@ export type CreateOrderParams = {
   createdAt: Date;
 };
 
+export type CustomCreateOrderParams = {
+  totalAmount: string;
+  event: string;
+  buyer: string;
+  // createdAt: Date;
+};
+
 export type GetOrdersByEventParams = {
   eventId: string;
   searchString: string;
